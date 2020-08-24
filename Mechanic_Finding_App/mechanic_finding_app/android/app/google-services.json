@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "7648059193",
+    "firebase_url": "https://mechanic-finding-app.firebaseio.com",
+    "project_id": "mechanic-finding-app",
+    "storage_bucket": "mechanic-finding-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:7648059193:android:b08e66888f5a1f0334d2e8",
+        "android_client_info": {
+          "package_name": "com.example.mechanic_finding_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "7648059193-q2quvrhf6ka13plo3r90klub3pgabgl6.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.mechanic_finding_app",
+            "certificate_hash": "924b6fa865cf19768e47cef3bf2ab697ba80013b"
+          }
+        },
+        {
+          "client_id": "7648059193-d09b3b02uougu075a5bmhacrr6d7i7de.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBRfqBB_FISv0_us9Zs72B8Q8Sxczo_Rm0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "7648059193-d09b3b02uougu075a5bmhacrr6d7i7de.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
