@@ -4,6 +4,7 @@ import 'package:mechanic_finding_app/user_signup.dart';
 import 'package:passwordfield/passwordfield.dart';
 
 import 'auth_service.dart';
+import 'home_page.dart';
 
 class LoginPage extends StatefulWidget {
   @override
@@ -12,6 +13,21 @@ class LoginPage extends StatefulWidget {
 
 class _LoginPageState extends State<LoginPage> {
   GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey();
+
+  Future<bool> onAuthRunning() {
+    return showDialog(
+        context: context,
+        builder: (context) => AlertDialog(
+          title: Text('Please Wait'),
+          actions: <Widget>[
+            Center(
+              child: CircularProgressIndicator(),
+            )
+          ],
+        ),
+        barrierDismissible: false
+    );
+  }
 
   Future<bool> _onBackPressed() {
     return showDialog(
@@ -30,7 +46,8 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   Future<void> loginFunction(String email) async {
-
+    Navigator.pop(context, true);
+    Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => HomePage()));
   }
 
   final formKey = new GlobalKey<FormState>();
@@ -118,6 +135,7 @@ class _LoginPageState extends State<LoginPage> {
                                       textColor: Colors.white,
                                       color: Colors.blueAccent,
                                       onPressed: () async {
+                                        onAuthRunning();
                                         if (formKey.currentState.validate()) {
                                           try {
                                             final form = formKey.currentState;
@@ -126,7 +144,7 @@ class _LoginPageState extends State<LoginPage> {
                                             String uid = await auth.signInWithEmailAndPassword(_email.text, _password.text);
                                             print('logged ======= $uid');
                                             if (uid.length > 0 && uid != null) {
-                                              loginFunction(_email.text.toString());
+                                              loginFunction(_email.text.toString()).then((value) => loggedUserDetails(_email.text.toString()));
                                             }
                                           } catch (e) {
                                             setState(() {

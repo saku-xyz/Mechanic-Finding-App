@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:mechanic_finding_app/auth_service.dart';
@@ -6,6 +7,10 @@ import 'home_page.dart';
 import 'login_page.dart';
 
 double deviceRatio;
+
+String userEmail;
+String userRole;
+String userName;
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -35,6 +40,14 @@ class MyHomePage extends StatefulWidget {
   _MyHomePageState createState() => _MyHomePageState();
 }
 
+Future<String> loggedUserDetails(String email) async{
+  FirebaseFirestore dbreference = FirebaseFirestore.instance;
+  await dbreference.collection('user').doc(email).collection('user_details').doc('details').get().then((value){
+    userName = value.data()['name'];
+  });
+  return 'success';
+}
+
 class _MyHomePageState extends State<MyHomePage> {
 
   Future<void> currentLoggedUser() async {
@@ -45,7 +58,8 @@ class _MyHomePageState extends State<MyHomePage> {
         print('no user exist');
         Timer(Duration(seconds: 2), () => Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => LoginPage())));
       }else{
-        Timer(Duration(seconds: 2), () => Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => HomePage())));
+        userEmail = currentUser.email.toString();
+        loggedUserDetails(userEmail).then((value) => Timer(Duration(seconds: 2), () => Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => HomePage()))));
       }
     }catch (e){
       print('Error: $e');
